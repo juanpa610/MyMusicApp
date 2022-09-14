@@ -1,0 +1,46 @@
+.section{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &__article{
+        width: 140px;
+        height: 210px;
+        margin: 4px;
+        
+        &__figure{
+            width: 140px;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+
+@media (min-width: 768px) {
+    
+    .section{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    
+        &__article{
+            
+            border: 1px solid red;
+            width: 180px;
+            height: 250px;
+            margin: 4px;
+            
+    
+            &__figure{
+                width: 140px;
+                height: 140px;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+    
+
+}

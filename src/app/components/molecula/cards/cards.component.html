@@ -1,0 +1,23 @@
+<section class="section" >
+    <article class="section__article" *ngFor="let canciones of nuevasCanciones" >
+        <figure class="section__article__figure" >
+
+            <app-img-cards 
+            [srcCards]="canciones.images[0].url" 
+            [classImg]="'img'">
+            </app-img-cards>
+
+            <app-text-cards
+            [figureTtext]="canciones.name"
+            [classFigcapation]="'figcaption'">
+            </app-text-cards>
+
+            <app-text-cards 
+            *ngFor="let artists of canciones.artists"
+            [figureTtext]="artists.name"
+            [classFigcapation]="'figcaption figcaption--artists'">
+            </app-text-cards>
+
+        </figure>
+    </article>
+</section>

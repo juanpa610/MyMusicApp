@@ -1,0 +1,39 @@
+.navbar{
+    width: 100%;
+    height: 100%;
+    
+    &__ul{
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: space-around;
+
+        &__li{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+    }
+}
+
+
+@media (min-width: 768px) {
+    
+    .navbar__ul{
+        flex-direction: column;
+        justify-content: flex-start; 
+
+        &__li{
+            height: 10%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            
+        }
+    }
+    
+}

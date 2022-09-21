@@ -2,13 +2,13 @@
     width: 100%;
     min-height:100vh;
 }
-.app-main-search{
+.app-main-favoritos{
     width: 100%;
     min-height: 100vh;
 }
 
 @media screen and (min-width: 768px){
-    .app-main-search{
+    .app-main-favoritos{
         display: flex;
         justify-content: flex-end;
     }

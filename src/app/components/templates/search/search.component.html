@@ -1,29 +1,7 @@
-<div>
-    <div>
-        <label for="exampleInputPassword1" class="form-label">Buscar</label>
-        <input #termino type="text" [hidden]="false" (keyup)="buscar(termino.value)" placeholder="¿Que tegustaria escuchar?">
-    </div>
-</div>
-<body class="body">
-    <main class="main">
-        <section class="main__section">
-            <h1 class="main__section__h1">Nuevos lanzamientos </h1>
-        </section>
-        <section class="main__section__dos">
-            <article class="main__section__dos__article" *ngFor="let canciones of artistas" >
-                <figure class="main__section__dos__article__figure" >
-                    <img class="main__section__dos__article__figure__img" [src]="canciones.album.images[0].url" alt="">
-                    <figcaption class="main__section__dos__article__figure__figu" >
-                        {{canciones.name}}
-                    </figcaption>
-                    <figcaption  class="main__section__dos__article__figure__figd" *ngFor="let artists of canciones.artists">
-                        {{canciones.artists[0].name}} 
-                    </figcaption>
-                </figure>
-            </article>
-           
-        </section>
-    </main>
-</body>
+<div class="contenedor">
 
-<app-header class="app__header"></app-header>
+    <app-main-search class="app-main-search" ></app-main-search>
+
+    <app-header class="app__header"></app-header>
+   
+</div>

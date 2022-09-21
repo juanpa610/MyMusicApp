@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -15,13 +16,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   user(){
     this.spotifyService.getUser()
     .subscribe( (data : any) =>{
-      console.log(data.display_name);
-      this.datosUser = data.display_name;
+      // console.log(data);
+      this.datosUser = data;
     });
   }
+
+  
 }

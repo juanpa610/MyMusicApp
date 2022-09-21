@@ -10,46 +10,95 @@ import { map } from'rxjs/operators';
 export class SpotifyService {
 
   constructor(private http: HttpClient, private token : TokenService) { 
-  
+   
   }
- 
-  getNewReleases(){
 
-    const headers = new HttpHeaders(
-      { 
+  getQuery(query : String) {
+    const url = `https://api.spotify.com/v1/${query}`;
+
+    const headers = new HttpHeaders({ 
       'Authorization' : 'Bearer '+this.token.getToken()
-      }
-    );
+    });
 
-    return this.http.get('https://api.spotify.com/v1/browse/new-releases/', {headers})
-    .pipe( map( (data: any) =>{
-      return data.albums.items;
-    }));
+    return this.http.get(url, { headers})
+  }
+
+  putQuery(query : String) {
+    const url = `https://api.spotify.com/v1/${query}`;
+
+    const headers = new HttpHeaders({ 
+      'Authorization' : 'Bearer '+this.token.getToken()
+    });
+
+    return this.http.put(url,null, {headers})
     
   }
 
+  deleteQuery(query : String) {
+    const url = `https://api.spotify.com/v1/${query}`;
+
+    const headers = new HttpHeaders({ 
+      'Authorization' : 'Bearer '+this.token.getToken()
+    });
+
+    return this.http.delete(url, {headers})
+    
+  }
+
+  
+
+  //Eliminar canciones de favoritos
+  deleteFavoritos(id : String){
+    return this.deleteQuery(`me/tracks?ids=${id}`)
+  }
+
+  //Agregar canciones a favoritos
+  putFavoritos(id : String) {
+    return this.putQuery(`me/tracks?ids=${id}`)
+  }
+  
+  //Datos sobre la playlist de Los 2000
+  getPlaylist(){
+    return this.getQuery(`playlists/37i9dQZF1EQn4jwNIohw50`)
+    .pipe( map( (data: any) =>
+      data
+    ));
+    //pipe transforma la data
+    //map para filtrar la informacion 
+    
+  }
+
+  getFavoristosDeLaPlaylist(ids: string[]){
+    const idss = ids.toString();
+    console.log(idss);
+
+    return this.getQuery(`me/tracks/contains?ids=${ids}`)
+    .subscribe( data  =>{ console.log(data)});
+  }
+  
+  //Datos sobre mis favoritos
+  getFavorits(){
+   
+    return this.getQuery(`me/tracks`)
+    .pipe(map((data : any) =>
+      data
+    ));
+  }
+
+  //Datos sobre busqueda de canciones
   getTrasck(termino : String){
-    const headers = new HttpHeaders(
-      { 
-      'Authorization' : 'Bearer '+this.token.getToken()
-      }
-    );
-
-    return this.http.get(`https://api.spotify.com/v1/search?q=${termino}&type=track&market=Co`, {headers})
-    .pipe(map((data : any) =>{
-      return  data.tracks.items
-    }));
+    return this.getQuery(`search?q=${termino}&type=track&market=Co`)
+    .pipe(map((data : any) =>
+      data.tracks.items 
+    ));
   }
 
+  //Datos del mi cuenta 
   getUser(){
-    const headers = new HttpHeaders(
-      { 
-      'Authorization' : 'Bearer '+this.token.getToken()
-      }
-    );
-    return this.http.get('	https://api.spotify.com/v1/me' , {headers});
+    return this.getQuery('me')
+    .pipe(map((data : any) =>  data ));
   }
 
- 
+
  
 }

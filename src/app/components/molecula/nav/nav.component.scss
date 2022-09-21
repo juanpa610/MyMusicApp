@@ -14,8 +14,14 @@
             justify-content: center;
             align-items: center;
         }
+       
         
     }
+}
+.bi{
+    font-size: 1.2em;
+    text-align: center;
+    color: rgb(0, 136, 255);
 }
 
 
@@ -26,7 +32,7 @@
         justify-content: flex-start; 
 
         &__li{
-            height: 10%;
+            height: 20%;
             width: 100%;
             display: flex;
             justify-content: center;

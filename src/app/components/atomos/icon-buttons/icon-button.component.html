@@ -1,4 +1,4 @@
-<a class="navbar__ul__li__a" [routerLink]="this.link" >
-    <i [class]="this.iconClass"></i>
-    <span class="this.iconTextClass" >{{this.iconText}}</span>
+<a class="a" [id]="this.idRedirect" [routerLink]="this.link" (click)="rout(this.idRedirect)" >
+    <i [id]="this.iconId" [class]="this.iconClass"></i>
+    <span [class]="this.iconTextClass" >{{this.iconText}}</span>
 </a>

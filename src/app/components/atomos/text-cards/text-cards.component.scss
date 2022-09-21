@@ -1,9 +1,19 @@
 .figcaption{
     font-weight: bolder;
-    font-size: 1em;
-    hyphens: auto;
+    font-size: 1.5em;
     color: white;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    
+    padding-left: 5px;
 }
 .figcaption--artists{
-    color: rgb(212, 191, 191);
+    font-weight: unset;
+    font-size: 1em;
+    color: rgba(225, 219, 219, 0.823);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 5px;
 }

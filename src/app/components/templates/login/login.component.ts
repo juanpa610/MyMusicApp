@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   iniciarSesion() {
-    const url = `${environment.endpoint}?client_id=${environment.clientId}&response_type=token&redirect_uri=${encodeURIComponent (environment.redirectUri)}&scope=${environment.scope}&show_dialog=true`;
+    const url = `${environment.endpoint}?client_id=${environment.clientId}&response_type=token&redirect_uri=${encodeURIComponent(environment.redirectUri)}&scope=${environment.scope}&show_dialog=true`;
 
     window.location.href = url;
   }

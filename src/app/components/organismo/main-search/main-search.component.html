@@ -1,0 +1,17 @@
+
+<main class="main">
+    <section class="main__section">
+        <label class="main__section__label">Buscar</label>
+        <input class="main__section__input" #termino type="text" [hidden]="false" (keyup)="buscar(termino.value)" placeholder="¿Que tegustaria escuchar?">
+    
+    </section>
+    <section class="main__section__dos">
+
+        <app-cards
+        [itemsSearch]="this.artistas">
+            
+        </app-cards>
+
+    </section>
+</main>
+    

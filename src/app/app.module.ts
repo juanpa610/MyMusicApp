@@ -14,6 +14,11 @@ import { CardsComponent } from './components/molecula/cards/cards.component';
 import { NavComponent } from './components/molecula/nav/nav.component';
 import { ImgCardsComponent } from './components/atomos/img-cards/img-cards.component';
 import { TextCardsComponent } from './components/atomos/text-cards/text-cards.component';
+import { FavoritosComponent } from './components/templates/favoritos/favoritos.component';
+import { MainFavoritosComponent } from './components/organismo/main-favoritos/main-favoritos.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { MainSearchComponent } from './components/organismo/main-search/main-search.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +32,16 @@ import { TextCardsComponent } from './components/atomos/text-cards/text-cards.co
     CardsComponent,
     NavComponent,
     ImgCardsComponent,
-    TextCardsComponent
+    TextCardsComponent,
+    FavoritosComponent,
+    MainFavoritosComponent,
+    MainSearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

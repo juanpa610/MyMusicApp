@@ -1,15 +1,27 @@
-
-
-    <main class="main">
-        <section class="main__section">
-            <h1 class="main__section__h1">Nuevos lanzamientos </h1>
-        </section>
-        <section class="main__section__dos">
-
-            <app-cards>
+<main class="main">
         
-            </app-cards>
-           
-        </section>
-    </main>
+    <section class="main__section">
+        <h1 class="main__section__h1">{{this.titlePag}} </h1>
+        <!-- <figure class="main__section__figure">
+            <img class="main__section__figure__img"  [src]="img_user" alt="">
+            <figcaption class="main__section__figure__figcap"  >{{display_name}}</figcaption>
+        </figure> -->
+    </section>
+    <div *ngIf="this.cargando">
+        <app-icon-button 
+        
+        [iconClass]="'bi bi-arrow-repeat'"
+        [iconText]="'Cargando'" >
+        </app-icon-button>
+    </div>
+    <section class="main__section__dos" >
+    
+        <app-cards
+        [items]="this.nuevasCanciones">
+
+        </app-cards>
+               
+    </section>
+
+</main>
     

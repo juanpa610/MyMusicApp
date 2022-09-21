@@ -1,4 +1,15 @@
 .contenedor{
-    width: 100vw;
+    width: 100%;
     min-height:100vh;
+}
+.app__main{
+    width: 100%;
+    min-height: 100vh;
+}
+
+@media screen and (min-width: 768px){
+    .app__main{
+        display: flex;
+        justify-content: flex-end;
+    }
 }

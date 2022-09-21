@@ -1,15 +1,19 @@
 .header{
-    background-color: black;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.991) 21%, rgb(73, 156, 229) 92%, rgba(255, 255, 255, 0) 100%);
+   
     width: 100%;
     height: 75px;
     position: fixed;
     bottom: 0;
     display: flex;
-    border-top: 1px solid gray;
 
+    overflow-x: hidden;
     &__nav{
         width: 100%;
         height: 100%;
+        
+    overflow-x: hidden;
     }
     
 }
@@ -24,8 +28,13 @@
         bottom: 0;
         display: flex;
         flex-direction: column;
-        border-top: unset;
-        border-right: 1px solid gray;
-    }
+       
+        overflow-x: hidden;
+        
+
+        background: rgb(0,0,0);
+        background: linear-gradient(135deg, rgba(0,0,0,1) 21%, rgb(73, 156, 229) 92%);
+
+     }
     
 }

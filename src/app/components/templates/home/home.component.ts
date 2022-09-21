@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SpotifyService } from 'src/app/services/spotify.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -10,12 +9,13 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor( private spotifyService: SpotifyService, private token : TokenService, private router: Router) {
+  constructor(  private token : TokenService, private router: Router) {
  
     this.obtenerUrl();
   }
 
   ngOnInit(): void {
+    
   }
 
   obtenerUrl  () {
@@ -25,5 +25,9 @@ export class HomeComponent implements OnInit {
     this.token.setToken(token);
     this.router.navigate(['/home']); 
   }
+
+ 
+ 
+  
 
 }

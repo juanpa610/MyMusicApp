@@ -2,27 +2,46 @@
     <ul class="navbar__ul">
         <li class="navbar__ul__li" >
             <app-icon-button
+            [routerLink]="['/home']"
+            [idRedirect]="'homeredirect'"
+            [iconId]="'home'"
             [link]="'/home'"
-            [iconClass]="'bi bi-house-door-fill'"
+            [iconClass]="'bi bi-house-fill'"
             [iconText]="'Home'" >
             </app-icon-button>
             
         </li>
         <li class="navbar__ul__li" >
             <app-icon-button
+            [routerLink]="['/search']"
+            [idRedirect]="'searchredirect'"
+            [iconId]="'search'"
             [link]="'/search'"
-            [iconClass]="'bi bi-search '"
+            [iconClass]="'bi bi-search'"
             [iconText]="'Search'" >
             </app-icon-button>
             
         </li>
         <li class="navbar__ul__li" >
             <app-icon-button
-            [link]="'/login'"
-            [iconClass]="'bi bi-heart-fill'"
+            [routerLink]="['/favoritos']"
+            [idRedirect]="'favoritosredirect'"
+            [iconId]="'favoritos'"
+            [link]="'/favoritos'"
+            [iconClass]="'bi bi-heart'"
             [iconText]="'Favoritos'" >
             </app-icon-button>
         </li>
+
+        
+        <!-- <li class="navbar__ul__li" >
+         
+        <figure *ngFor="let datosUser of datosUser" style="border: 1px solid red; background-color: aliceblue;">
+
+            <img [src]="datosUser.url" width="40px" height="40px" alt="">
+         </figure>
+        </li> -->
+
        
     </ul>
 </nav>

@@ -11,10 +11,10 @@ export class PlaylistEffects {
   cargandoPlaylist$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cargarPlaylist),
-        tap(data => console.log('effect  tap',data)),
+        // tap(data => console.log('effect  tap',data)),
         mergeMap(() => this.spotifyServices.getPlaylist()
         .pipe(
-            tap(data => console.log('effect  tap',data)),
+            // tap(data => console.log('effect  tap',data)),
             map(play => cargarPlaylistSuccess({ playlist:play }) ),
             catchError(err => of (cargarPlaylistError({ payload:err }) ) )
             )

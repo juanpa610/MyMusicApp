@@ -11,10 +11,10 @@ export class UserDataEffects {
   cargandoUserData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(cargarUserData),
-        tap(data => console.log('effect user data tap',data)),
+        // tap(data => console.log('effect user data tap',data)),
         mergeMap(() => this.spotifyServices.getUser()
         .pipe(
-            tap(data => console.log('effect user data  tap',data)),
+            // tap(data => console.log('effect user data  tap',data)),
             map(use => cargarUserDataSuccess({ userData: use }) ),
             catchError(err => of (cargarUserDataError({ payload:err }) ) )
             )

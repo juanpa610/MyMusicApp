@@ -1,7 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { PlaylistState } from 'src/app/store/app.state';
+import * as store from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-cards',
@@ -28,23 +28,6 @@ export class CardsComponent implements OnInit {
               private playlistStore: Store<store.PlaylistState>,
               private userDataStore: Store<store.UserDataState>) {}
 
-  ngOnInit(): void {
-
-    this.playlistStore.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
-      this.nuevasCanciones = playlist;
-      this.titlePag = name;
-      this.cargando = cargando;
-      this.error    = error;
-    })
-
-    if(this.location.path() === '/search'){
-      this.isSearchPath = this.isSearchPath
-    }else{
-      this.isSearchPath = !this.isSearchPath
-    }
-    
-  }
-
   // private getData() {
   //   this.spotify.getPlaylist()
   //     .subscribe((data: any) => {
@@ -59,6 +42,29 @@ export class CardsComponent implements OnInit {
   //     );
   // }
 
+
+  ngOnInit(): void {
+
+    this.playlistStore.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
+      // this.arrayPlaylist = playlist;
+      // this.cargando = cargando;
+      // this.error    = error;
+    })
+
+    if(this.location.path() === '/search'){
+      this.isSearchPath = this.isSearchPath
+    }else{
+      this.isSearchPath = !this.isSearchPath
+    }
+    
+  }
+
+  modificarFav(id : String){
+    console.log(id);
+    
+  }
+
+ 
   // ngOnInit(): void {
 
   //   this.getData();

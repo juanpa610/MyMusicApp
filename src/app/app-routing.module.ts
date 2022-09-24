@@ -4,14 +4,15 @@ import { FavoritosComponent } from './components/templates/favoritos/favoritos.c
 import { HomeComponent } from './components/templates/home/home.component';
 import { LoginComponent } from './components/templates/login/login.component';
 import { SearchComponent } from './components/templates/search/search.component';
+import { AuthSpotifyGuard } from './guard/auth-spotify.guard';
 
 const routes: Routes = [
   
   {path: ''     , redirectTo: 'login', pathMatch: 'full'},
-  {path: 'home' , component: HomeComponent},
-  {path: 'search' , component: SearchComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'favoritos', component: FavoritosComponent},
+  {path: 'home' , component: HomeComponent, canActivate: [AuthSpotifyGuard]},
+  {path: 'search' , component: SearchComponent , canActivate: [AuthSpotifyGuard]},
+  {path: 'login', component: LoginComponent },
+  {path: 'favoritos', component: FavoritosComponent, canActivate: [AuthSpotifyGuard]},
 ];
 
 @NgModule({

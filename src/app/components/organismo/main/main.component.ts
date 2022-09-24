@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from 'src/app/services/spotify.service';
+import { Store } from '@ngrx/store';
+import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
+import { cargarUserData } from 'src/app/store/actions/user.actions';
+import * as store from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-main',
@@ -8,62 +11,38 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class MainComponent implements OnInit {
 
+  isAutemtifing: boolean = false;
+
   display_name : string = '';
-  img_user: Array<string> = [];
+  img_user: string = '';
 
-  nuevasCanciones: any[] = [];
+  nuevasCanciones: ReadonlyArray<any> = [];
+  cargando: boolean = false;
+  error: any;
+
   titlePag : string =''
-  cargando: boolean;
 
-  constructor(private spotifyService : SpotifyService) { 
-
-    this.cargando = true;
-
-    this.spotifyService.getPlaylist()
-      .subscribe( (data : any) =>{
-        this.cargando = false;
-        this.titlePag = data.name;
-        this.nuevasCanciones = data.tracks.items;
-      }
-    );
-
-  
-
-    // console.log(this.nuevasCanciones);
-
-    // this.asignarIdsArray();
-
-  }
+  constructor(private playlistStore: Store<store.PlaylistState>,
+              private userDataStore: Store<store.UserDataState>
+  ) {}
 
   ngOnInit(): void {
-    this.user();
+    this.playlistStore.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
+      this.nuevasCanciones = playlist;
+      this.titlePag = name;
+      this.cargando = cargando;
+      this.error    = error;
+    })
+    this.userDataStore.select('userData').subscribe( ({ display_name, images }) => {
+     this.img_user = images;
+    })
+
+    this.playlistStore.dispatch( cargarPlaylist());
+    this.userDataStore.dispatch( cargarUserData());
   }
 
-  user(){
-    this.spotifyService.getUser()
-    .subscribe( (data : any) =>{
-      this.display_name = data.display_name;
-      this.img_user= data.images[0].url;
-    });
+  logout(){
+    this.isAutemtifing = true;
+    // this.tokrn.removeToken(this.isAutemtifing );
   }
-
-  // asignarIdsArray(){
-  //   this._spotifyService.getPlaylist()
-  //   .subscribe( (data : any) =>{
-      
-  //     data.forEach((element : any) => {
-  //       this.arrayIds.push(element.track.id)
-  //     });
-  //     console.log(this.arrayIds.length);
-  //     console.log(this.arrayIds);
-      
-  //     this._spotifyService.getFavoristosDeLaPlaylist(this.arrayIds);
-
-  //     //aqui le estoy mandando los id a getFavoristPlay para que 
-  //     // me los convierta en una cadena de texto 
-      
-  //   })
-  // }
-  
-
 }

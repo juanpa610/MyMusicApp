@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './components/organismo/main/main.component';
 import { SearchComponent } from './components/templates/search/search.component';
 import { IconButtonComponent } from './components/atomos/icon-buttons/icon-button.component';
-import { CardsComponent } from './components/molecula/cards/cards.component';
 import { NavComponent } from './components/molecula/nav/nav.component';
 import { ImgCardsComponent } from './components/atomos/img-cards/img-cards.component';
 import { TextCardsComponent } from './components/atomos/text-cards/text-cards.component';
@@ -19,6 +18,17 @@ import { MainFavoritosComponent } from './components/organismo/main-favoritos/ma
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { MainSearchComponent } from './components/organismo/main-search/main-search.component';
+import { IconFavComponent } from './components/atomos/icon-fav/icon-fav.component';
+
+import { StoreModule } from '@ngrx/store';
+import { PlaylistEffects } from './store/effects/playlist.effects';
+import { EffectsModule } from '@ngrx/effects';
+import { playlistReducer } from './store/reducers/playlist.reducer';
+import { CardsComponent } from './components/molecula/cards/cards.component';
+import { favoritesReducer } from './store/reducers/favorites.reducer';
+import { FavoritesEffects } from './store/effects/favorites.effects';
+import { userDataReducer } from './store/reducers/user.reducer';
+import { UserDataEffects } from './store/effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -29,19 +39,23 @@ import { MainSearchComponent } from './components/organismo/main-search/main-sea
     MainComponent,
     SearchComponent,
     IconButtonComponent,
-    CardsComponent,
     NavComponent,
     ImgCardsComponent,
     TextCardsComponent,
     FavoritosComponent,
     MainFavoritosComponent,
-    MainSearchComponent
+    MainSearchComponent,
+    IconFavComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    StoreModule.forRoot({ playlist: playlistReducer, favorites: favoritesReducer, userData: userDataReducer}),
+    EffectsModule.forRoot([PlaylistEffects, FavoritesEffects, UserDataEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

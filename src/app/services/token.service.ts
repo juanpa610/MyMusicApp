@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class TokenService {
 
+  isAutemtifing: boolean = true;
+
   constructor() { }
 
   setToken(token : string) {
@@ -17,6 +19,14 @@ export class TokenService {
     return window.localStorage.getItem('token');
   }
 
+  isaut(){
+    // removeToken(isAutemtifing : boolean){
+    //   localStorage.removeItem('token');
+      
+    //   return this.isAutemtifing;
+      
+    // }
+  }
   
 
 }

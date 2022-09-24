@@ -81,7 +81,7 @@ export class SpotifyService {
    
     return this.getQuery(`me/tracks`)
     .pipe(map((data : any) =>
-      data
+      data.items
     ));
   }
 
@@ -96,7 +96,9 @@ export class SpotifyService {
   //Datos del mi cuenta 
   getUser(){
     return this.getQuery('me')
-    .pipe(map((data : any) =>  data ));
+    .pipe(map((data : any) => 
+      data 
+    ));
   }
 
 

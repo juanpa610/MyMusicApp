@@ -1,7 +1,14 @@
-
+.cargando{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+}
 .main{
     width: 100%;
-    background-color: rgb(27, 25, 25);
+    background-color: black;
     display: flex;
     flex-direction: column;
 }

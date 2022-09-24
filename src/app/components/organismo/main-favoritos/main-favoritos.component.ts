@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService } from 'src/app/services/spotify.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
+import { FavoritesState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-main-favoritos',
@@ -8,19 +11,37 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class MainFavoritosComponent implements OnInit {
 
-  misFavoritos: any[]=[];
+  misFavoritos: ReadonlyArray<any> = [];
+  cargando: boolean = false;
+  error: any;
 
-  constructor(private servicesSpotift: SpotifyService) {
-    this.servicesSpotift.getFavorits()
-    .subscribe( (data : any) =>{
-      // console.log('datad',data);
-      this.misFavoritos= data.items;
-    });
+  cargando$: Observable<boolean> = new Observable();
+
+
+  constructor(private store: Store<FavoritesState>) {
+
+    // this.servicesSpotift.getFavorits()
+    // .subscribe( (data : any) =>{
+    //   // console.log('datad',data);
+    //   this.misFavoritos= data.items;
+    // });
    }
 
   ngOnInit(): void {
+
+    
+    // this.cargando$= this.store.select(selectCargando);
+
+    
+    this.store.select('favorites').subscribe( ({ favorites, cargando, error }) => {
+      this.misFavoritos = favorites;
+      this.cargando = cargando;
+      this.error    = error;
+        
+    })
+   
+    this.store.dispatch( cargarFavorites());
   }
 
-  
 
 }

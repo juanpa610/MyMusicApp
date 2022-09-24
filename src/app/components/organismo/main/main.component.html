@@ -1,19 +1,22 @@
-<main class="main">
+<div class="cargando" *ngIf="cargando">
+    <app-icon-button 
+    
+    [iconClass]="'bi bi-arrow-repeat'"
+    [iconText]="'Cargando...'" >
+    </app-icon-button>
+</div>
+<main class="main" *ngIf="!cargando">
         
     <section class="main__section">
         <h1 class="main__section__h1">{{this.titlePag}} </h1>
-        <!-- <figure class="main__section__figure">
+        <figure class="main__section__figure">
             <img class="main__section__figure__img"  [src]="img_user" alt="">
-            <figcaption class="main__section__figure__figcap"  >{{display_name}}</figcaption>
-        </figure> -->
+            <a (click)="logout()" class="ai" href="">
+                <i class="bi bi-box-arrow-right ai__i"></i>
+            </a>
+        </figure>
     </section>
-    <div *ngIf="this.cargando">
-        <app-icon-button 
-        
-        [iconClass]="'bi bi-arrow-repeat'"
-        [iconText]="'Cargando'" >
-        </app-icon-button>
-    </div>
+   
     <section class="main__section__dos" >
     
         <app-cards

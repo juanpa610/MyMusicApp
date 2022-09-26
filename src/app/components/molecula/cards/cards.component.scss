@@ -5,17 +5,15 @@
     
     &__figure{
         width: 45%;
-        height: 13em;
         margin: 4px;
-        padding-bottom: 0.5em;
         background-color: rgba(73, 156, 229, 0.358);
         border-radius: 0.5em;
-        // border: 1px solid black;
-        
+        border: 1px solid white;
+        padding: 0.5em;
         &__img{
             margin: auto;
-            width: 9em;
-            height: 9em;
+            width: 7.5em;
+            height: 7.5em;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,27 +23,21 @@
             display: flex;
             justify-content: space-between;
             
-
             &__section{
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    white-space: nowrap;
                 width: 80%;
                 display: flex;
-            }
-            &__i{
-                width: 30%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
             }
         }
     }
 }
-
 .bi{
     font-size: 1.2em;
     text-align: center;
     color: rgb(0, 136, 255);
 }
-
 
 @media (min-width: 768px) {
     

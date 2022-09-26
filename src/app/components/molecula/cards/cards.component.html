@@ -15,20 +15,13 @@
         <div class="section__figure__div">
             <section class="section__figure__div__section">
                 <app-text-cards 
-                    *ngFor="let artists of item.track.album.artists"
-                    [figureTtext]="artists.name"
+                    *ngFor="let artists of item.track.artists"
+                    [figureTtext]="artists.name+' -'"
                     [classFigcapation]="'figcaption figcaption--artists'">
                     
                 </app-text-cards>
             </section>
-            <app-icon-fav
-                class="section__figure__div__i"
-                [class]="iconClasss"
-                id="{{item.track.id}}"   
-                
-                (click)="this.modificarFav(item.track.id)" 
-            >
-            </app-icon-fav>
+            <i class='bi bi-heart' id="{{item.track.id}}" (click)="this.modificarFav(item.track.id)" ></i>
         </div>
             
     </figure>
@@ -59,12 +52,6 @@
                 </app-text-cards>
             </section>
 
-            <app-icon-fav
-                class="section__figure__div__i"
-                [class]="iconClasss"
-                id="{{itemSearch.id}}"   
-            >
-            </app-icon-fav>
             <!-- <app-icon-fav
                 class="section__figure__div__i"
                 [class]="iconClasss"

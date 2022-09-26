@@ -16,7 +16,6 @@ export const favoritesReducer = createReducer(
       ...state,
       cargando: false, 
       favorites
-    
     })),
     
     on(actions.cargarFavoritesError, (state,{ payload}) => ({

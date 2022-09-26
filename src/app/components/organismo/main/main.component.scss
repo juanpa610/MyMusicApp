@@ -34,9 +34,11 @@
         
         width: 40%;
         &__img{
-            border-radius: 100% 100%;
-            max-width: 30px;
-            height: 100%;
+            width: 3em;
+            height: 3em;
+            border-radius: 0.5em;
+            object-fit: cover;
+            object-position: center;
         }
         &__figcap{
             text-overflow: ellipsis;

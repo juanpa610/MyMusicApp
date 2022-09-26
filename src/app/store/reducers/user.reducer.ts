@@ -18,7 +18,6 @@ export const userDataReducer = createReducer(
     id: userData.id,
     images: userData.images[0].url,
     cargando: false, 
-    userData: {...userData}
   })),
 
   on(actions.cargarUserDataError, (state,{ payload}) => ({

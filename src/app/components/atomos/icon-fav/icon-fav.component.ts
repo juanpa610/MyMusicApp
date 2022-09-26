@@ -10,7 +10,9 @@ export class IconFavComponent implements OnInit {
   @Input() iconClass: string = '';
   @Input() idicon: string = '';
 
-  constructor() { }
+  constructor() {
+    this.iconClass
+   }
 
   ngOnInit(): void {
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
 import { cargarUserData } from 'src/app/store/actions/user.actions';
 import * as store from 'src/app/store/app.state';
@@ -19,11 +20,11 @@ export class MainComponent implements OnInit {
   nuevasCanciones: ReadonlyArray<any> = [];
   cargando: boolean = false;
   error: any;
-
   titlePag : string =''
 
   constructor(private playlistStore: Store<store.PlaylistState>,
-              private userDataStore: Store<store.UserDataState>
+              private userDataStore: Store<store.UserDataState>,
+              private favoritesDataStore: Store<store.FavoritesState>
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +40,7 @@ export class MainComponent implements OnInit {
 
     this.playlistStore.dispatch( cargarPlaylist());
     this.userDataStore.dispatch( cargarUserData());
+    this.favoritesDataStore.dispatch( cargarFavorites());
   }
 
   logout(){

@@ -2,6 +2,9 @@ import { Component, OnInit, Input} from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import * as store from 'src/app/store/app.state';
+import { SpotifyService } from 'src/app/services/spotify.service';
+import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
+import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 
 @Component({
   selector: 'app-cards',
@@ -10,111 +13,70 @@ import * as store from 'src/app/store/app.state';
 })
 export class CardsComponent implements OnInit {
 
-  iconClasss: string = 'bi bi-heart';
-  isTrackFavorite : boolean = false;
-
   @Input() items: ReadonlyArray<any> = [];
   @Input() itemsSearch: ReadonlyArray<any> = [];
   isSearchPath: boolean = true;
 
-  arrayPlaylist: any[]=[];	
-  arrayFavorits: any[]=[];	
+  arrayPlaylist: ReadonlyArray<any> = [];
+  arrayFavorits: ReadonlyArray<any> = [];	
 
   cargando: boolean = false;
   error: any;
   
-  
   constructor(private location: Location,
               private playlistStore: Store<store.PlaylistState>,
-              private userDataStore: Store<store.UserDataState>) {}
-
-  // private getData() {
-  //   this.spotify.getPlaylist()
-  //     .subscribe((data: any) => {
-  //       this.arrayPlaylist=data.tracks.items;
-  //       this.spotify.getFavorits()
-  //       .subscribe((data2: any) => {
-  //         this.arrayFavorits=data2.items;
-  //         this.midifiClassIcon();
-  //       }
-  //       );
-  //     }
-  //     );
-  // }
-
-
+              private favoritesStore: Store<store.FavoritesState>,
+              private spotify: SpotifyService
+  ) {}
+  
   ngOnInit(): void {
+    
+    // this.getData();
 
-    this.playlistStore.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
-      // this.arrayPlaylist = playlist;
-      // this.cargando = cargando;
-      // this.error    = error;
+    this.playlistStore.select('playlist').subscribe( ({ playlist }) => {
+      this.arrayPlaylist = playlist;
     })
-
+    this.favoritesStore.select('favorites').subscribe( ({  favorites }) => {
+      this.arrayFavorits = favorites;
+    })
+    
     if(this.location.path() === '/search'){
       this.isSearchPath = this.isSearchPath
     }else{
       this.isSearchPath = !this.isSearchPath
     }
     
+    this.midifiClassIcon();
   }
 
-  modificarFav(id : String){
-    console.log(id);
+  isFavorite  = (arrayFavorito: any, id: string): boolean =>{
     
+    return !!arrayFavorito.find( (item: any) => item.track.id === id)
   }
 
- 
-  // ngOnInit(): void {
+  modificarFav(id: any){
+    if(this.isFavorite(this.arrayFavorits,id)) {
+      document.getElementById(id)?.classList.replace('bi-heart-fill', 'bi-heart');
+      this.spotify.deleteFavoritos(id).subscribe(() => {});
+  }
+  else{
+    document.getElementById(id)?.classList.replace('bi-heart', 'bi-heart-fill');
+    this.spotify.putFavoritos(id).subscribe(() => {});
+  }
+  }
 
-  //   this.getData();
-
-   
-  // }
-
-  // isFavorite  = (arrayFavorito: any, id: string): boolean =>{
-  //   return !!arrayFavorito.find( (item: any) => item.track.id === id)
-  // }
-
-  // modificarFav(id: any){
-
-  //   if(this.isFavorite(this.arrayFavorits,id)) {
-  //     document.getElementById(id)?.classList.add('bi-heart');
-  //     document.getElementById(id)?.classList.remove('bi-heart-fill');
-  //     this.spotify.deleteFavoritos(id).subscribe(() => {
-  //       this.spotify.getFavorits()
-  //       .subscribe((data2: any) => {
-  //       this.arrayFavorits = data2.items ;
-  //     });
-  //     });
-  //     //   this.spotify.getFavorits()
-  //     //   .subscribe((data2: any) => {
-  //     //   this.arrayFavorits = data2.items ;
-  //     // });
-  //   }else{
-  //     document.getElementById(id)?.classList.remove('bi-heart');
-  //     document.getElementById(id)?.classList.add('bi-heart-fill');
-  //     this.spotify.putFavoritos(id).subscribe(() => {});
-  //     this.spotify.getFavorits()
-  //     .subscribe((data2: any) => {
-  //       this.arrayFavorits = data2.items ;
-  //     }
-  //     );
-  //   }
-
+  midifiClassIcon(){
     
-
-  // }
-
-  // midifiClassIcon(){
-  //   this.arrayPlaylist.forEach( (item: any) => {
-  //     if(this.isFavorite(this.arrayFavorits,item.track.id)) {
-  //       // console.log(item.track.name, 'es fav');
-  //       document.getElementById(item.track.id)?.classList.remove('bi-heart');
-  //       document.getElementById(item.track.id)?.classList.add('bi-heart-fill');
-  
-  //     }
-  //   });
-  // }
+    console.log(this.arrayPlaylist);
+    console.log(this.arrayFavorits);
+    this.arrayPlaylist.forEach( (item: any) => {
+      if(this.isFavorite(this.arrayFavorits,item.track.id)) {
+        console.log(item.track.name, 'es fav');
+        console.log(item.track.id);
+        document.getElementById(item.track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
+        // document.getElementById(item.track.id)?.classList.add('bi-heart');
+      }
+    });
+  }
 
 }

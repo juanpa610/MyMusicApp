@@ -8,11 +8,12 @@ import { AuthSpotifyGuard } from './guard/auth-spotify.guard';
 
 const routes: Routes = [
   
-  {path: ''     , redirectTo: 'login', pathMatch: 'full'},
   {path: 'home' , component: HomeComponent, canActivate: [AuthSpotifyGuard]},
-  {path: 'search' , component: SearchComponent , canActivate: [AuthSpotifyGuard]},
   {path: 'login', component: LoginComponent },
+  {path: 'search' , component: SearchComponent , canActivate: [AuthSpotifyGuard]},
   {path: 'favoritos', component: FavoritosComponent, canActivate: [AuthSpotifyGuard]},
+  {path: ''     , redirectTo: 'login', pathMatch: 'full'},
+  {path: '**'     , redirectTo: 'login', pathMatch: 'full'}
 ];
 
 @NgModule({

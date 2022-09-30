@@ -1,17 +1,21 @@
 .figcaption{
     font-weight: bolder;
-    font-size: 1.5em;
+    font-size: 1em;
     color: white;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+   
     
 }
 .figcaption--artists{
     font-weight: unset;
-    font-size: 1em;
+    font-size: 0.8em;
     color: rgba(225, 219, 219, 0.823);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
+
+
+

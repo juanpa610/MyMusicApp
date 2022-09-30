@@ -7,10 +7,12 @@
         [classImg]="'img'">
         </app-img-cards> 
 
-        <app-text-cards
-        [figureTtext]="item.track.name"
-        [classFigcapation]="'figcaption'">
-        </app-text-cards>
+            <app-text-cards
+            [figureTtext]="item.track.name"
+            [classFigcapation]="'figcaption'">
+            </app-text-cards>
+        
+        
 
         <div class="section__figure__div">
             <section class="section__figure__div__section">
@@ -21,7 +23,7 @@
                     
                 </app-text-cards>
             </section>
-            <i class='bi bi-heart' id="{{item.track.id}}" (click)="this.modificarFav(item.track.id)" ></i>
+            <i [class]='className' id="{{item.track.id}}" (click)="this.modificarFav(item.track)" ></i>
         </div>
             
     </figure>
@@ -51,16 +53,9 @@
                     
                 </app-text-cards>
             </section>
-
-            <!-- <app-icon-fav
-                class="section__figure__div__i"
-                [class]="iconClasss"
-                id="{{itemSearch.id}}"   
-                (click)="this.modificarFav(itemSearch.id)" 
-            >
-
-            </app-icon-fav> -->
-            
+            <!-- <i [class]='className' id="{{itemSearch.track.id}}" (click)="this.modificarFav(itemSearch.track.id)" ></i>
+            -->
+          
         </div>
     
     </figure>

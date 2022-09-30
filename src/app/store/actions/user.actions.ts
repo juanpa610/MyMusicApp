@@ -11,3 +11,10 @@ export const cargarUserDataError = createAction(
     '[UserData] Cargar UserData Error',
     props<{payload: any}>()
 );
+export const login = createAction(
+    '[UserData] Inciar'
+);
+
+export const logout = createAction(
+    '[UserData] Cerrar'
+);

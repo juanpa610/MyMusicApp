@@ -1,7 +1,9 @@
+
 .contenedor{
     width: 100%;
     min-height:100vh;
     background-color: black;
+    font-size: 16px;
 }
 .app__main{
     width: 100%;
@@ -14,3 +16,35 @@
         justify-content: flex-end;
     }
 }
+
+@media (min-width: 375px){
+    .contenedor{
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 425px){
+    .contenedor{
+        font-size: 20px;
+    }
+}
+@media (min-width: 768px) {
+    .contenedor{
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .contenedor{
+        min-height: 100vh;
+        font-size: 25px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .contenedor{
+        min-height: 100vh;
+        font-size: 30px;
+    }
+}
+

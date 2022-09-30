@@ -5,28 +5,37 @@ import { Injectable } from '@angular/core';
 })
 export class TokenService {
 
-  isAutemtifing: boolean = true;
+  isAutemtifing: string ='';
 
-  constructor() { }
+  constructor() {
+    this.getToken();
+   }
 
   setToken(token : string) {
-    if(token != undefined){
+    if(token != undefined ||null || ''){
       localStorage.setItem('token', token);
     }
   }
 
-  getToken(){
-    return window.localStorage.getItem('token');
+  Token(){
+    if(window.location.hash){
+      const url_token= window.location.hash.substring(1).split("&")[0].split("=")[1];
+      localStorage.setItem('token', url_token);
+      this.isAutemtifing = url_token
+    }
+    
+    return !!window.localStorage.getItem('token');
   }
 
-  isaut(){
-    // removeToken(isAutemtifing : boolean){
-    //   localStorage.removeItem('token');
-      
-    //   return this.isAutemtifing;
-      
-    // }
+  getToken(){
+    return localStorage.getItem('token');
   }
+
+  removeToken(){
+    localStorage.removeItem('token');
+  }
+
+  
   
 
 }

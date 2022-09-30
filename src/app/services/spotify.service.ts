@@ -59,13 +59,10 @@ export class SpotifyService {
   
   //Datos sobre la playlist de Los 2000
   getPlaylist(){
-    return this.getQuery(`playlists/37i9dQZF1EIWQWjctf49S5`)
+    return this.getQuery(`playlists/5Qz9oNbJXa6IRQDlyAfKCq`)
     .pipe( map( (data: any) =>
       data
     ));
-    //pipe transforma la data
-    //map para filtrar la informacion 
-    
   }
 
   getFavoristosDeLaPlaylist(ids: string[]){

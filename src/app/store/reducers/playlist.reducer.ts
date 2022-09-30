@@ -2,7 +2,7 @@ import { createReducer, on } from '@ngrx/store';
 import { Playlist } from 'src/app/interfaces/playlist.interface';
 import * as actions from '../actions/playlist.actions';
 
-export const playlistinitialState: Playlist = {
+export const playlistInitialState: Playlist = {
   playlist: [],
   name: '',
   cargando: false,
@@ -10,7 +10,7 @@ export const playlistinitialState: Playlist = {
 };
 
 export const playlistReducer = createReducer(
-  playlistinitialState,
+  playlistInitialState,
   on(actions.cargarPlaylist, state => ({...state,  cargando: true})),
 
   on(actions.cargarPlaylistSuccess, (state,{playlist}) => ({
@@ -18,11 +18,9 @@ export const playlistReducer = createReducer(
     cargando: false, 
     playlist: playlist.tracks.items,
     name: playlist.name
-
-  
   })),
 
-  on(actions.cargarPlaylistError, (state,{ payload}) => ({
+  on(actions.cargarPlaylistError, (state,{payload}) => ({
     ...state,
     cargando: false, 
     error:{

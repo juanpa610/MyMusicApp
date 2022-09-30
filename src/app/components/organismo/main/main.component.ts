@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { TokenService } from 'src/app/services/token.service';
 import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
 import { cargarUserData } from 'src/app/store/actions/user.actions';
-import * as store from 'src/app/store/app.state';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-main',
@@ -11,8 +12,6 @@ import * as store from 'src/app/store/app.state';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
-  isAutemtifing: boolean = false;
 
   display_name : string = '';
   img_user: string = '';
@@ -22,29 +21,31 @@ export class MainComponent implements OnInit {
   error: any;
   titlePag : string =''
 
-  constructor(private playlistStore: Store<store.PlaylistState>,
-              private userDataStore: Store<store.UserDataState>,
-              private favoritesDataStore: Store<store.FavoritesState>
+  constructor(private store: Store<AppState>,
+              private token: TokenService
   ) {}
 
   ngOnInit(): void {
-    this.playlistStore.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
+    this.store.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
       this.nuevasCanciones = playlist;
       this.titlePag = name;
       this.cargando = cargando;
       this.error    = error;
     })
-    this.userDataStore.select('userData').subscribe( ({ display_name, images }) => {
+    this.store.select('userData').subscribe( ({ display_name, images }) => {
      this.img_user = images;
     })
 
-    this.playlistStore.dispatch( cargarPlaylist());
-    this.userDataStore.dispatch( cargarUserData());
-    this.favoritesDataStore.dispatch( cargarFavorites());
+    this.store.dispatch( cargarPlaylist());
+    this.store.dispatch( cargarUserData());
+    this.store.dispatch( cargarFavorites());
   }
 
   logout(){
-    this.isAutemtifing = true;
-    // this.tokrn.removeToken(this.isAutemtifing );
+    // this.store.dispatch( logout());
+    this.token.removeToken();
+    window.location.href = "/login";
   }
+
+  
 }

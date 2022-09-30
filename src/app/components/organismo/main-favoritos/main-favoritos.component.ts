@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
-import { FavoritesState } from 'src/app/store/app.state';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-main-favoritos',
@@ -18,7 +18,7 @@ export class MainFavoritosComponent implements OnInit {
   cargando$: Observable<boolean> = new Observable();
 
 
-  constructor(private store: Store<FavoritesState>) {
+  constructor(private store: Store<AppState>) {
 
     // this.servicesSpotift.getFavorits()
     // .subscribe( (data : any) =>{

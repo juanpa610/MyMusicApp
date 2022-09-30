@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  
   endpoint : 'https://accounts.spotify.com/authorize',
   clientId : 'fac66df6fa7a4fdeb2026407e426db45',
   redirectUri : 'http://localhost:4200/home',

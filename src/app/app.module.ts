@@ -23,12 +23,12 @@ import { IconFavComponent } from './components/atomos/icon-fav/icon-fav.componen
 import { StoreModule } from '@ngrx/store';
 import { PlaylistEffects } from './store/effects/playlist.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { playlistReducer } from './store/reducers/playlist.reducer';
 import { CardsComponent } from './components/molecula/cards/cards.component';
-import { favoritesReducer } from './store/reducers/favorites.reducer';
 import { FavoritesEffects } from './store/effects/favorites.effects';
-import { userDataReducer } from './store/reducers/user.reducer';
 import { UserDataEffects } from './store/effects/user.effects';
+import { appReducers } from './store/app.state';
+import { AddFavoriteEffects } from './store/effects/addFavorite.effects';
+import { DeleteFavoriteEffects } from './store/effects/deleteFavorite.effect';
 
 @NgModule({
   declarations: [
@@ -52,10 +52,9 @@ import { UserDataEffects } from './store/effects/user.effects';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ playlist: playlistReducer, favorites: favoritesReducer, userData: userDataReducer}),
-    EffectsModule.forRoot([PlaylistEffects, FavoritesEffects, UserDataEffects]),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([PlaylistEffects, FavoritesEffects, UserDataEffects, AddFavoriteEffects, DeleteFavoriteEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 <div class="cargando" *ngIf="cargando">
+    
     <app-icon-button 
     
     [iconClass]="'bi bi-arrow-repeat'"
@@ -11,15 +12,16 @@
         <h1 class="main__section__h1">{{this.titlePag}} </h1>
         <figure class="main__section__figure">
             <img class="main__section__figure__img"  [src]="img_user" alt="">
-            <a (click)="logout()" class="ai" href="">
-                <i class="bi bi-box-arrow-right ai__i"></i>
-            </a>
+            
+            <i (click)="logout()" class="bi bi-box-arrow-right "></i>
+            
         </figure>
     </section>
    
     <section class="main__section__dos" >
     
         <app-cards
+        [className]="'bi bi-heart'"
         [items]="this.nuevasCanciones">
 
         </app-cards>

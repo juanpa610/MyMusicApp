@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
@@ -9,6 +10,9 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 export class MainSearchComponent implements OnInit {
   
   artistas: any[] = [];
+
+  subcriptionPlaylist!: Subscription; 
+  subcriptionFavorite!: Subscription; 
 
   constructor(private spotifyService : SpotifyService) { }
 

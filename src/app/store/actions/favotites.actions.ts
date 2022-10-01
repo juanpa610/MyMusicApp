@@ -4,15 +4,12 @@ export const cargarFavorites = createAction('[Playlist] Cargar Favorites');
 
 export const cargarFavoritesSuccess = createAction(
     '[Playlist] Cargar Favorites Success',
-    props<{favorites: any}>()
+    props<{tracks: any}>()
 );
-
 export const cargarFavoritesError = createAction(
     '[Playlist] Cargar Favorites Error',
     props<{payload: any}>()
 );
-
-
 export const deleteFavorite = createAction(
     '[Playlist] Delete Favorite',
     props<{ id: string; }>()

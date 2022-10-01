@@ -15,7 +15,7 @@ export class FavoritesEffects {
         mergeMap(() => this.spotifyServices.getFavorits()
         .pipe(
             // tap(data => console.log('effect  favorites tap',data)),
-            map(fav => cargarFavoritesSuccess({ favorites: fav }) ),
+            map(fav => cargarFavoritesSuccess({ tracks: fav }) ),
             catchError(err => of (cargarFavoritesError({ payload:err }) ) )
             )
       )

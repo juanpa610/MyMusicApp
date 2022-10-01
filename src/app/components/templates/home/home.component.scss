@@ -38,7 +38,13 @@
 @media (min-width: 1440px) {
     .contenedor{
         min-height: 100vh;
-        font-size: 30px;
+        font-size: 25px;
+    }
+}
+@media (min-width: 1920px) {
+    .contenedor{
+        min-height: 100vh;
+        font-size: 25px;
     }
 }
 

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
 import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
@@ -11,7 +12,7 @@ import { AppState } from 'src/app/store/app.state';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy{
 
   display_name : string = '';
   img_user: string = '';
@@ -21,12 +22,14 @@ export class MainComponent implements OnInit {
   error: any;
   titlePag : string =''
 
+  subcriptionPlaylist!: Subscription;  
+  
   constructor(private store: Store<AppState>,
               private token: TokenService
   ) {}
 
   ngOnInit(): void {
-    this.store.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
+    this.subcriptionPlaylist= this.store.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
       this.nuevasCanciones = playlist;
       this.titlePag = name;
       this.cargando = cargando;
@@ -39,6 +42,10 @@ export class MainComponent implements OnInit {
     this.store.dispatch( cargarPlaylist());
     this.store.dispatch( cargarUserData());
     this.store.dispatch( cargarFavorites());
+  }
+
+  ngOnDestroy(): void {
+    this.subcriptionPlaylist.unsubscribe();
   }
 
   logout(){

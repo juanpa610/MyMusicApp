@@ -2,15 +2,49 @@
     width: 100%;
     min-height:100vh;
     background-color: black;
+    font-size: 16px;
 }
-.app-main-favoritos{
+.app__main__favoritos{
     width: 100%;
     min-height: 100vh;
 }
-
 @media screen and (min-width: 768px){
-    .app-main-favoritos{
+    .app__main__favoritos{
         display: flex;
         justify-content: flex-end;
     }
 }
+@media (min-width: 375px){
+    .contenedor{
+        font-size: 18px;
+    }
+}
+@media (min-width: 425px){
+    .contenedor{
+        font-size: 20px;
+    }
+}
+@media (min-width: 768px) {
+    .contenedor{
+        font-size: 22px;
+    }
+}
+@media (min-width: 1024px) {
+    .contenedor{
+        min-height: 100vh;
+        font-size: 25px;
+    }
+}
+@media (min-width: 1440px) {
+    .contenedor{
+        min-height: 100vh;
+        font-size: 25px;
+    }
+}
+@media (min-width: 1920px) {
+    .contenedor{
+        min-height: 100vh;
+        font-size: 25px;
+    }
+}
+

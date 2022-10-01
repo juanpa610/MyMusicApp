@@ -1,20 +1,22 @@
-import { Component, OnInit, Input, OnDestroy} from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, AfterViewInit} from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Subscription } from 'rxjs';
 import { addFavorite, deleteFavorite } from 'src/app/store/actions/favotites.actions';
+import { Track } from 'src/app/interfaces/favorites.interface';
+
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss']
 })
-export class CardsComponent implements OnInit, OnDestroy {
+export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
 
   @Input() items: ReadonlyArray<any> = [];
   @Input() className:string = '';
-  @Input() classNamese:string = '';
+  @Input() classNameSearch:string = '';
   @Input() itemsSearch: ReadonlyArray<any> = [];
   isSearchPath: boolean = true;
 
@@ -28,59 +30,60 @@ export class CardsComponent implements OnInit, OnDestroy {
   error: any;
   
   constructor(private location: Location,
-              private store: Store<AppState>,
-  ) {}
+              private store: Store<AppState>) {}
 
-  ngOnInit(): void {
-    
-    // this.getData();
-    
+  ngAfterViewInit(): void {
+
     this.subcriptionPlaylist= this.store.select('playlist').subscribe( ({ playlist }) => {
       this.arrayPlaylist = playlist;
+      this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
+        this.arrayFavorits = tracksFav;
+        if(this.arrayPlaylist && this.arrayFavorits){
+          this.modifiClassIcon();
+        }
+      })
     })
-    
-    this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  favorites }) => {
-      this.arrayFavorits = favorites;
-      this.modifiClassIcon();
-    })
-    
+  }
+
+  ngOnInit(): void {
     if(this.location.path() === '/search'){
       this.isSearchPath = this.isSearchPath
     }else{
       this.isSearchPath = !this.isSearchPath
     }
-    
   }
-
+  
   ngOnDestroy(): void {
     this.subcriptionPlaylist.unsubscribe();
     this.subcriptionFavorite.unsubscribe();
   }
 
   isFavorite  = (arrayFavorito: any, id: string): boolean =>{
-    return !!arrayFavorito.find( (item: any) => item.track.id === id)
+    return !!arrayFavorito.find( (item: any) => item.track.id === id) || !!arrayFavorito.find( (item: any) => item.id === id)
   }
 
   modifiClassIcon(){
     this.arrayPlaylist.forEach( (item: any) => {
-
       if(this.isFavorite(this.arrayFavorits,item.track.id)) {
-        console.log('id es fav');
+        // console.log('id es fav');
         document.getElementById(item.track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
       }
-
     });
   }
   
-  modificarFav(track: any){
-   
-    if(this.isFavorite(this.arrayFavorits,track.id)) {
-      document.getElementById(track.id)?.classList.replace('bi-heart-fill', 'bi-heart');
+  modificarFav(track: Track){
+    if(this.isFavorite(this.arrayFavorits,track.id)  ) {
       this.store.dispatch( deleteFavorite({id: track.id} ));
+      this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
+        document.getElementById(track.id)?.classList.replace('bi-heart-fill', 'bi-heart');
+        this.arrayFavorits = tracksFav;
+      })
     }else{
-      document.getElementById(track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
       this.store.dispatch( addFavorite({track}));
+      this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
+        document.getElementById(track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
+        this.arrayFavorits = tracksFav;
+      })
     }
   }
-
 }

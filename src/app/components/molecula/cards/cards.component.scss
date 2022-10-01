@@ -15,7 +15,6 @@
         padding: 0.4em;
         box-shadow: 0.125rem 0.125rem 0.125rem 0.125rem rgba(8, 196, 238, 0.827);
         
-       
         &__img{
             margin: auto;
             width: 7em;
@@ -96,6 +95,16 @@
         grid-template-columns: 25% 25% 25% 25%;
         &__figure{
             width: 50%;
+        }
+    }
+    
+}
+@media (min-width: 1920px) {
+    .section{
+        padding-bottom: 2em;
+        grid-template-columns: 20% 20% 20% 20% 20%;
+        &__figure{
+            width: 80%;
         }
     }
     

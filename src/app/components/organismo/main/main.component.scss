@@ -10,7 +10,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    
 }
 .main__section{
     width: 100%;
@@ -52,7 +51,6 @@
             color: rgb(0, 136, 255);
         }
     }
-    
     overflow-x: hidden;
 }
 
@@ -62,8 +60,11 @@
     }
 }
 
+
 @media (min-width: 1024px) {
-    
+    .main{
+        width: 80%;
+    }
 }
 
 @media (min-width: 1440px) {
@@ -71,4 +72,3 @@
         width: 85%;
     }
 }
-

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { AppState } from 'src/app/store/app.state';
 
@@ -9,38 +9,30 @@ import { AppState } from 'src/app/store/app.state';
   templateUrl: './main-favoritos.component.html',
   styleUrls: ['./main-favoritos.component.scss']
 })
-export class MainFavoritosComponent implements OnInit {
+export class MainFavoritosComponent implements OnInit, OnDestroy{
 
   misFavoritos: ReadonlyArray<any> = [];
   cargando: boolean = false;
   error: any;
 
-  cargando$: Observable<boolean> = new Observable();
+  subcriptionFavorite!: Subscription; 
 
-
-  constructor(private store: Store<AppState>) {
-
-    // this.servicesSpotift.getFavorits()
-    // .subscribe( (data : any) =>{
-    //   // console.log('datad',data);
-    //   this.misFavoritos= data.items;
-    // });
-   }
+  constructor(private store: Store<AppState>){}
 
   ngOnInit(): void {
-
     
-    // this.cargando$= this.store.select(selectCargando);
-
-    
-    this.store.select('favorites').subscribe( ({ favorites, cargando, error }) => {
-      this.misFavoritos = favorites;
+    this.subcriptionFavorite= this.store.select('favorites').subscribe( ({tracksFav, cargando, error }) => {
+      this.misFavoritos = tracksFav;
       this.cargando = cargando;
       this.error    = error;
         
     })
    
     this.store.dispatch( cargarFavorites());
+  }
+
+  ngOnDestroy(): void {
+    this.subcriptionFavorite.unsubscribe();
   }
 
 

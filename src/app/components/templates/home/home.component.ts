@@ -12,9 +12,7 @@ import { AppState } from 'src/app/store/app.state';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(  private token : TokenService, private router: Router, private store: Store<AppState>) {
-    this.store.dispatch(login());
-    this.store.dispatch( cargarUserData());
+  constructor(   private router: Router, private store: Store<AppState>) {
     this.obtenerUrl();
   }
 
@@ -22,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   obtenerUrl  () {
     this.router.navigate(['/home']);
+  
   }
   
 }

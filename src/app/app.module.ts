@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/templates/login/login.component';
-import { HeaderComponent } from './components/organismo/header/header.component';
 import { HomeComponent } from './components/templates/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './components/organismo/main/main.component';
@@ -29,12 +28,12 @@ import { UserDataEffects } from './store/effects/user.effects';
 import { appReducers } from './store/app.state';
 import { AddFavoriteEffects } from './store/effects/addFavorite.effects';
 import { DeleteFavoriteEffects } from './store/effects/deleteFavorite.effect';
+import { AsideComponent } from './components/organismo/aside/aside.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HeaderComponent,
     HomeComponent,
     MainComponent,
     SearchComponent,
@@ -46,7 +45,8 @@ import { DeleteFavoriteEffects } from './store/effects/deleteFavorite.effect';
     MainFavoritosComponent,
     MainSearchComponent,
     IconFavComponent,
-    CardsComponent
+    CardsComponent,
+    AsideComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { Favorites } from 'src/app/interfaces/favorites.interface';
 import * as actions from '../actions/favotites.actions';
 
 export const favoritesinitialState: Favorites = {
-  favorites: [],
+  tracksFav: [],
   cargando: false,
   error: null,
   id: ''
@@ -13,10 +13,10 @@ export const favoritesReducer = createReducer(
   favoritesinitialState,
     on(actions.cargarFavorites, state => ({...state,  cargando: true})),
   
-    on(actions.cargarFavoritesSuccess, (state,{favorites}) => ({
+    on(actions.cargarFavoritesSuccess, (state,{tracks}) => ({
       ...state,
       cargando: false, 
-      favorites
+      tracksFav: tracks
     })),
 
     on(actions.cargarFavoritesError, (state,{ payload}) => ({
@@ -32,13 +32,13 @@ export const favoritesReducer = createReducer(
   
     
     on(actions.deleteFavorite, (state,{id}) => {
-      console.log(id);
+      // console.log(id);
       return {...state, id};
     }),
 
     on(actions.deleteFavoriteSuccess, (state,{id}) => {
       let newState = {...state}
-      newState.favorites = newState.favorites.filter(f => f.track.id !== id); 
+      newState.tracksFav = newState.tracksFav.filter(f => f.track.id !== id); 
       return newState;
     }),
 
@@ -49,7 +49,7 @@ export const favoritesReducer = createReducer(
   
     on(actions.addFavoriteSuccess, (state,{track}) => {
       let newState = {...state};
-      newState.favorites = [track, ...newState.favorites];
+      newState.tracksFav = [track, ...newState.tracksFav];
       return newState;
     }),
   );

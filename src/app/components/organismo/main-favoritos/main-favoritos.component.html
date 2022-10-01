@@ -1,18 +1,24 @@
-
+<div class="cargando" *ngIf="cargando">
+    
+    <app-icon-button 
+    [iconClass]="'bi bi-arrow-repeat'"
+    [iconText]="'Cargando...'" >
+    </app-icon-button>
+        
+</div>
 <main class="main" *ngIf="!cargando">
 
     <section class="main__section">
         <h1 class="main__section__h1">Canciones que te gustan </h1>
     </section>
-    <section class="main__section__dos">
-
+    <section class="main__section__dos" >
+    
         <app-cards
         [className]="'bi bi-heart-fill'"
         [items]="this.misFavoritos">
-            
+
         </app-cards>
-
-
+               
     </section>
 </main>
     

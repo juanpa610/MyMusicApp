@@ -1,3 +1,8 @@
+@mixin mixinResponsive ($media){
+    @media screen and (min-width:$media){
+        @content;
+    }
+}
 .contenedor{
     width: 100%;
     min-height:100vh;
@@ -8,43 +13,38 @@
     width: 100%;
     min-height: 100vh;
 }
-@media screen and (min-width: 768px){
-    .app__main__favoritos{
-        display: flex;
-        justify-content: flex-end;
-    }
-}
-@media (min-width: 375px){
-    .contenedor{
-        font-size: 18px;
-    }
-}
-@media (min-width: 425px){
-    .contenedor{
-        font-size: 20px;
-    }
-}
-@media (min-width: 768px) {
-    .contenedor{
-        font-size: 22px;
-    }
-}
-@media (min-width: 1024px) {
-    .contenedor{
-        min-height: 100vh;
-        font-size: 25px;
-    }
-}
-@media (min-width: 1440px) {
-    .contenedor{
-        min-height: 100vh;
-        font-size: 25px;
-    }
-}
-@media (min-width: 1920px) {
-    .contenedor{
-        min-height: 100vh;
-        font-size: 25px;
-    }
-}
 
+.contenedor{
+    @include mixinResponsive(375px){
+        font-size: 18px;
+    }   
+}
+.contenedor{
+    @include mixinResponsive(425px){
+        font-size: 20px;
+    }   
+}
+.contenedor{
+    @include mixinResponsive(768px){
+        .app__main__favoritos{
+            display: flex;
+            justify-content: flex-end;
+        }
+        font-size: 22px;
+    }   
+}
+.contenedor{
+    @include mixinResponsive(1024px){
+        font-size: 25px;
+    }   
+}
+.contenedor{
+    @include mixinResponsive(1440px){
+        font-size: 28px;
+    }   
+}
+.contenedor{
+    @include mixinResponsive( 1920px){
+        font-size: 25px;
+    }   
+}

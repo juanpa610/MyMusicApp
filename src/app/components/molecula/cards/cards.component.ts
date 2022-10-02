@@ -71,18 +71,18 @@ export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
     });
   }
   
-  modificarFav(track: Track){
+  modificarFav(track: any){
     if(this.isFavorite(this.arrayFavorits,track.id)  ) {
       this.store.dispatch( deleteFavorite({id: track.id} ));
       this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
-        document.getElementById(track.id)?.classList.replace('bi-heart-fill', 'bi-heart');
         this.arrayFavorits = tracksFav;
+        document.getElementById(track.id)?.classList.replace('bi-heart-fill', 'bi-heart');
       })
     }else{
       this.store.dispatch( addFavorite({track}));
       this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
-        document.getElementById(track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
         this.arrayFavorits = tracksFav;
+        document.getElementById(track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
       })
     }
   }

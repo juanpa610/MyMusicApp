@@ -8,14 +8,13 @@ import { cargarFavorites, cargarFavoritesError, cargarFavoritesSuccess } from '.
 @Injectable()
 export class FavoritesEffects {
  
-  cargandoFavorites$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(cargarFavorites),
+  cargandoFavorites$ = createEffect(() => this.actions$.pipe(
+      ofType(cargarFavorites), //el oftype es la action que el effect va a escuchar
         // tap(data => console.log('effect favorites tap',data)),
-        mergeMap(() => this.spotifyServices.getFavorits()
+        mergeMap(() => this.spotifyServices.getFavorits() // retorna toda la Data 
         .pipe(
             // tap(data => console.log('effect  favorites tap',data)),
-            map(fav => cargarFavoritesSuccess({ tracks: fav }) ),
+            map(fav => cargarFavoritesSuccess({ tracks: fav }) ),  // aqui estoy mapeando los datos en Tracks
             catchError(err => of (cargarFavoritesError({ payload:err }) ) )
             )
       )

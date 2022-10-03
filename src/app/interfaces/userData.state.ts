@@ -1,5 +1,4 @@
-
-export interface DataUser {
+export interface DataUserState {
     display_name: string;
     id: string;
     images: string;

@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
 import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
 import { cargarUserData } from 'src/app/store/actions/user.actions';
 import { AppState } from 'src/app/store/app.state';
+import { selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +19,7 @@ export class MainComponent implements OnInit, OnDestroy{
   img_user: string = '';
 
   nuevasCanciones: ReadonlyArray<any> = [];
+  listaTracks$: Observable<any> = new Observable();
   cargando: boolean = false;
   error: any;
   titlePag : string =''
@@ -26,7 +28,9 @@ export class MainComponent implements OnInit, OnDestroy{
   
   constructor(private store: Store<AppState>,
               private token: TokenService
-  ) {}
+  ) {
+    this.listaTracks$ = this.store.select(selectTracksPlaylist)
+  }
 
   ngOnInit(): void {
     this.subcriptionPlaylist= this.store.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
@@ -49,7 +53,6 @@ export class MainComponent implements OnInit, OnDestroy{
   }
 
   logout(){
-    // this.store.dispatch( logout());
     this.token.removeToken();
     window.location.href = "/login";
   }

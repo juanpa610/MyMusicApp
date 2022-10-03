@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -7,23 +7,28 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   templateUrl: './main-search.component.html',
   styleUrls: ['./main-search.component.scss']
 })
-export class MainSearchComponent implements OnInit {
+export class MainSearchComponent implements OnInit,AfterViewInit {
   
   artistas: any[] = [];
 
-  subcriptionPlaylist!: Subscription; 
-  subcriptionFavorite!: Subscription; 
-
+  @ViewChild('termino') emailInputElement!: ElementRef<HTMLInputElement>;
+  
   constructor(private spotifyService : SpotifyService) { }
 
   ngOnInit(): void {
+    this.buscar('a')
+  }
+
+  ngAfterViewInit(): void {
+    this.emailInputElement.nativeElement.focus();
   }
 
   buscar(termino : String){
-    this.spotifyService.getTrasck(termino)
-    .subscribe((data : any) =>{
-    console.log( this.artistas = data);
-    });
+    if(termino === '' || termino === undefined || termino === null){
+      this.spotifyService.getTrasck(termino='arca').subscribe(data => this.artistas = data)
+    }else{
+      this.spotifyService.getTrasck(termino).subscribe(data => this.artistas = data)
+    }
   }
 
 }

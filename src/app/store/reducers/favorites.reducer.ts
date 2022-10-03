@@ -1,16 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
-import { Favorites } from 'src/app/interfaces/favorites.interface';
+import { FavoritesState } from 'src/app/interfaces/favorites.state';
 import * as actions from '../actions/favotites.actions';
 
-export const favoritesinitialState: Favorites = {
+//Estado inicial!!!
+export const favoritesinitialState: FavoritesState = {
   tracksFav: [],
   cargando: false,
   error: null,
   id: ''
 };
-
+// El reducer va a ser la funcion que va a escuchar la accion, 
+// agarrar el estado actual y agregar la informacion que viene para generar un nuevo estado 
 export const favoritesReducer = createReducer(
-  favoritesinitialState,
+  favoritesinitialState, //los 3 "..." puntos son para generar un nuevo estado --> no para modificar
+    // on lo que hace es que escucha la accion que se esta ejecutando o disparando 
     on(actions.cargarFavorites, state => ({...state,  cargando: true})),
   
     on(actions.cargarFavoritesSuccess, (state,{tracks}) => ({
@@ -43,7 +46,7 @@ export const favoritesReducer = createReducer(
     }),
 
     on(actions.addFavorite, (state,{track}) => ({
-       ...state,
+      ...state,
       track
     })),
   

@@ -1,13 +1,13 @@
 import { ActionReducerMap} from '@ngrx/store';
-import { Favorites } from '../interfaces/favorites.interface';
-import { Playlist } from '../interfaces/playlist.interface';
-import { DataUser } from '../interfaces/userData.interface';
+import { FavoritesState } from '../interfaces/favorites.state';
+import { PlaylistState } from '../interfaces/playlist.state';
+import { DataUserState } from '../interfaces/userData.state';
 import * as reducers from './reducers';
 
 export interface AppState{
-    playlist: Playlist;
-    favorites: Favorites;
-    userData: DataUser;
+    playlist : PlaylistState;
+    favorites: FavoritesState;
+    userData : DataUserState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {

@@ -8,8 +8,7 @@ import { cargarPlaylist, cargarPlaylistError, cargarPlaylistSuccess } from '../a
 @Injectable()
 export class PlaylistEffects {
  
-  cargandoPlaylist$ = createEffect(() =>
-    this.actions$.pipe(
+  cargandoPlaylist$ = createEffect(() => this.actions$.pipe(
       ofType(cargarPlaylist),
         // tap(data => console.log('effect  tap',data)),
         mergeMap(() => this.spotifyServices.getPlaylist()

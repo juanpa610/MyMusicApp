@@ -8,8 +8,7 @@ import { addFavorite, addFavoriteSuccess, cargarFavoritesError } from '../action
 @Injectable()
 export class AddFavoriteEffects {
   
-  addFavorite$ = createEffect(() =>
-    this.actions$.pipe(
+  addFavorite$ = createEffect(() => this.actions$.pipe(
       ofType(addFavorite),
         // tap(data => console.log('effect favorites tap',data)),
         mergeMap((action : any) => {

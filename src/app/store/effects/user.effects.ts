@@ -8,8 +8,7 @@ import { cargarUserData, cargarUserDataError, cargarUserDataSuccess } from '../a
 @Injectable()
 export class UserDataEffects {
  
-  cargandoUserData$ = createEffect(() =>
-    this.actions$.pipe(
+  cargandoUserData$ = createEffect(() => this.actions$.pipe(
       ofType(cargarUserData),
         // tap(data => console.log('effect user data tap',data)),
         mergeMap(() => this.spotifyServices.getUser()

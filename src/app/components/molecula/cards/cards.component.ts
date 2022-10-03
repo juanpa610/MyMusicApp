@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Subscription } from 'rxjs';
 import { addFavorite, deleteFavorite } from 'src/app/store/actions/favotites.actions';
-import { Track } from 'src/app/interfaces/favorites.interface';
+import { Track } from 'src/app/interfaces/track.interface';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Track } from 'src/app/interfaces/favorites.interface';
 })
 export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
 
-  @Input() items: ReadonlyArray<any> = [];
+  @Input() items: ReadonlyArray<Track> = [];
   @Input() className:string = '';
   @Input() classNameSearch:string = '';
   @Input() itemsSearch: ReadonlyArray<any> = [];
@@ -46,6 +46,9 @@ export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   ngOnInit(): void {
+    
+    
+
     if(this.location.path() === '/search'){
       this.isSearchPath = this.isSearchPath
     }else{

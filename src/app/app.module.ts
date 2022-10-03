@@ -51,10 +51,10 @@ import { AsideComponent } from './components/organismo/aside/aside.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule, //
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([PlaylistEffects, FavoritesEffects, UserDataEffects, AddFavoriteEffects, DeleteFavoriteEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([PlaylistEffects, FavoritesEffects, UserDataEffects, AddFavoriteEffects, DeleteFavoriteEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

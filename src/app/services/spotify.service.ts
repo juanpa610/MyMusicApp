@@ -84,7 +84,7 @@ export class SpotifyService {
 
   //Datos sobre busqueda de canciones
   getTrasck(termino : String){
-    return this.getQuery(`search?q=${termino}&type=track&market=Co`)
+    return this.getQuery(`search?q=${termino}&type=track&market=CO`)
     .pipe(map((data : any) =>
       data.tracks.items 
     ));

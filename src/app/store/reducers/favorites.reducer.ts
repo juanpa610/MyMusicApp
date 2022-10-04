@@ -6,8 +6,7 @@ import * as actions from '../actions/favotites.actions';
 export const favoritesinitialState: FavoritesState = {
   tracksFav: [],
   cargando: false,
-  error: null,
-  id: ''
+  error: null
 };
 // El reducer va a ser la funcion que va a escuchar la accion, 
 // agarrar el estado actual y agregar la informacion que viene para generar un nuevo estado 
@@ -16,11 +15,12 @@ export const favoritesReducer = createReducer(
     // on lo que hace es que escucha la accion que se esta ejecutando o disparando 
     on(actions.cargarFavorites, state => ({...state,  cargando: true})),
   
-    on(actions.cargarFavoritesSuccess, (state,{tracks}) => ({
-      ...state,
+    on(actions.cargarFavoritesSuccess, (state,{tracksFav}) => {
+      return {...state,
       cargando: false, 
-      tracksFav: tracks
-    })),
+      tracksFav: tracksFav
+    }
+    }),
 
     on(actions.cargarFavoritesError, (state,{ payload}) => ({
       ...state,
@@ -33,22 +33,19 @@ export const favoritesReducer = createReducer(
     
     })),
   
-    
-    on(actions.deleteFavorite, (state,{id}) => {
-      // console.log(id);
+    on(actions.deleteFavorite, (state,{id}) => { 
       return {...state, id};
     }),
 
     on(actions.deleteFavoriteSuccess, (state,{id}) => {
       let newState = {...state}
-      newState.tracksFav = newState.tracksFav.filter(f => f.track.id !== id); 
+      newState.tracksFav = newState.tracksFav.filter(f => f.id !== id); 
       return newState;
     }),
 
-    on(actions.addFavorite, (state,{track}) => ({
-      ...state,
-      track
-    })),
+    on(actions.addFavorite, (state,{track}) => {
+    return {...state, track }
+    }),
   
     on(actions.addFavoriteSuccess, (state,{track}) => {
       let newState = {...state};

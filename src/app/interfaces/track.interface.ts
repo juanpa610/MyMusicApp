@@ -1,5 +1,4 @@
 export interface Track {
-    track: any
     album: Album[]
     artists: Artist[]
     id: string

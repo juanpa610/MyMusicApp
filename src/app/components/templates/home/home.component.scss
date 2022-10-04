@@ -13,7 +13,6 @@
     width: 100%;
     min-height: 100vh;
 }
-
 .contenedor{
     @include mixinResponsive(375px){
         font-size: 18px;

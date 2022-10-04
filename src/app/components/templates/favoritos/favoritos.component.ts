@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
+import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-favoritos',
@@ -7,13 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritosComponent implements OnInit {
 
- 
-  constructor() {
-
-   }
+  constructor(private store: Store<AppState>){}
 
   ngOnInit(): void {
+    this.store.dispatch(cargarFavorites());
   }
-
 
 }

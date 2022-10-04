@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthSpotifyGuard } from './auth-spotify.guard';
+import { LogoutGuard } from './logout.guard';
 
-describe('AuthSpotifyGuard', () => {
-  let guard: AuthSpotifyGuard;
+describe('LogoutGuard', () => {
+  let guard: LogoutGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(AuthSpotifyGuard);
+    guard = TestBed.inject(LogoutGuard);
   });
 
   it('should be created', () => {

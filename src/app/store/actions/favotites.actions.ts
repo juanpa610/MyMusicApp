@@ -4,11 +4,10 @@ import { Track } from 'src/app/interfaces/track.interface';
 export const cargarFavorites = createAction(
     '[Favorites] Cargar Favorites'
 );
-
 export const cargarFavoritesSuccess = createAction(
     '[Favorites] Cargar Favorites Success',
     // ReadonlyArray : array de lectura y cada valor del array va ser de tipo Track
-    props<{tracks: ReadonlyArray<Track> }>() 
+    props<{tracksFav: ReadonlyArray<Track> }>() 
 );
 export const cargarFavoritesError = createAction(
     '[Favorites] Cargar Favorites Error',
@@ -31,5 +30,5 @@ export const addFavorite = createAction(
 
 export const addFavoriteSuccess = createAction(
     '[Favorites] Add Favorite Success ',
-    props<{ track: any; }>()
+    props<{ track: Track }>()
 );

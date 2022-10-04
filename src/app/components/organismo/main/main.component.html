@@ -1,4 +1,4 @@
-<div class="cargando" *ngIf="cargando">
+<div class="cargando" *ngIf="(cargando$ | async)">
     
     <app-icon-button 
     [iconClass]="'bi bi-arrow-repeat'"
@@ -6,10 +6,10 @@
     </app-icon-button>
     
 </div>
-<main class="main" *ngIf="!cargando">
+<main class="main" *ngIf="!(cargando$ | async)">
         
     <section class="main__section">
-        <h1 class="main__section__h1">{{this.titlePag}} </h1>
+        <h1 class="main__section__h1">{{this.titlePag$ | async}} </h1>
         <figure class="main__section__figure">
             <img class="main__section__figure__img"  [src]="img_user" alt="">
             
@@ -22,8 +22,7 @@
     
         <app-cards
         [className]="'bi bi-heart'"
-        [items]="this.listaTracks$ | async">
-
+        [items]="nuevasCanciones">
         </app-cards>
                
     </section>

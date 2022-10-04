@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { SpotifyService } from 'src/app/services/spotify.service';
-import { TokenService } from 'src/app/services/token.service';
-import { login } from 'src/app/store/actions/user.actions';
+import { cargarUserData, login } from 'src/app/store/actions/user.actions';
 import { AppState } from 'src/app/store/app.state';
 import { environment } from 'src/environments/environment';   
 @Component({
@@ -21,6 +19,8 @@ export class LoginComponent implements OnInit {
   iniciarSesion() {
     const url = `${environment.endpoint}?client_id=${environment.clientId}&response_type=token&redirect_uri=${encodeURIComponent(environment.redirectUri)}&scope=${environment.scope}&show_dialog=true`;
     window.location.href = url;
+    // this.store.dispatch(cargarUserData())
+    this.store.dispatch(login())
   }
 
 

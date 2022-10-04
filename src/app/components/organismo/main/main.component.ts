@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { TokenService } from 'src/app/services/token.service';
-import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
 import { cargarUserData } from 'src/app/store/actions/user.actions';
 import { AppState } from 'src/app/store/app.state';
-import { selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector';
+import { selectCargando, selectNamePlaylist, selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector';
 
 @Component({
   selector: 'app-main',
@@ -15,37 +14,35 @@ import { selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector'
 })
 export class MainComponent implements OnInit, OnDestroy{
 
-  display_name : string = '';
   img_user: string = '';
 
-  nuevasCanciones: ReadonlyArray<any> = [];
-  listaTracks$: Observable<any> = new Observable();
-  cargando: boolean = false;
-  error: any;
-  titlePag : string =''
+  nuevasCanciones: any = [];
+  
+  cargando$: Observable<any> = new Observable();
+  titlePag$: Observable<any> = new Observable();
 
   subcriptionPlaylist!: Subscription;  
   
   constructor(private store: Store<AppState>,
               private token: TokenService
   ) {
-    this.listaTracks$ = this.store.select(selectTracksPlaylist)
+    
   }
 
   ngOnInit(): void {
-    this.subcriptionPlaylist= this.store.select('playlist').subscribe( ({ playlist, name, cargando, error }) => {
-      this.nuevasCanciones = playlist;
-      this.titlePag = name;
-      this.cargando = cargando;
-      this.error    = error;
-    })
-    this.store.select('userData').subscribe( ({ display_name, images }) => {
+
+    this.subcriptionPlaylist = this.store.select(selectTracksPlaylist).subscribe( 
+      playlist => this.nuevasCanciones= playlist);
+
+    this.cargando$ = this.store.select(selectCargando)
+    this.titlePag$ = this.store.select(selectNamePlaylist)
+    
+    this.store.select('userData').subscribe( ({ images }) => {
      this.img_user = images;
     })
 
-    this.store.dispatch( cargarPlaylist());
     this.store.dispatch( cargarUserData());
-    this.store.dispatch( cargarFavorites());
+    this.store.dispatch( cargarPlaylist());
   }
 
   ngOnDestroy(): void {

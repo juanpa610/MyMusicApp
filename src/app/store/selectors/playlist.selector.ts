@@ -13,3 +13,8 @@ export const selectCargando= createSelector(
     selectPlaylist,
     (state: PlaylistState) => state.cargando
 );
+
+export const selectNamePlaylist= createSelector(
+    selectPlaylist,
+    (state: PlaylistState) => state.name
+);

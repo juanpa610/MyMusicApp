@@ -4,7 +4,7 @@ import { AppState } from '../app.state';
  
 export const selectFavorites = (state: AppState) => state.favorites; // <-- selector PADRE
  
-export const selectCargando= createSelector(
+export const selectCargandoFav= createSelector(
     selectFavorites,
     (state: FavoritesState) => state.cargando // <-- selector HIJO
 );

@@ -1,20 +1,22 @@
-import { Component, OnInit, Input, OnDestroy, AfterViewInit} from '@angular/core';
+import { Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { Subscription } from 'rxjs';
-import { addFavorite, deleteFavorite } from 'src/app/store/actions/favotites.actions';
+import { addFavorite, cargarFavorites, deleteFavorite } from 'src/app/store/actions/favotites.actions';
+import { selectTracksFavorites } from 'src/app/store/selectors/favorites.selectors';
+import { selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector';
 import { Track } from 'src/app/interfaces/track.interface';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.scss']
 })
-export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
+export class CardsComponent implements OnInit, OnDestroy  {
 
-  @Input() items: ReadonlyArray<Track> = [];
+  @Input() items: any;
   @Input() className:string = '';
   @Input() classNameSearch:string = '';
   @Input() itemsSearch: ReadonlyArray<any> = [];
@@ -23,32 +25,29 @@ export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
   subcriptionPlaylist!: Subscription; 
   subcriptionFavorite!: Subscription; 
 
-  arrayPlaylist: ReadonlyArray<any> = [];
-  arrayFavorits: ReadonlyArray<any> = [];	
+  arrayPlaylist: any = [];
+  arrayFavorits: ReadonlyArray<Track> = [];	
 
   cargando: boolean = false;
   error: any;
   
   constructor(private location: Location,
               private store: Store<AppState>) {}
-
-  ngAfterViewInit(): void {
-
-    this.subcriptionPlaylist= this.store.select('playlist').subscribe( ({ playlist }) => {
-      this.arrayPlaylist = playlist;
-      this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
-        this.arrayFavorits = tracksFav;
-        if(this.arrayPlaylist && this.arrayFavorits){
-          this.modifiClassIcon();
-        }
-      })
-    })
-  }
-
+  
   ngOnInit(): void {
-    
-    
 
+    this.subcriptionPlaylist= this.store.select(selectTracksPlaylist).subscribe( (playlist) => {
+      this.arrayPlaylist = playlist;
+      this.store.dispatch(cargarFavorites());
+    });
+
+    this.subcriptionFavorite= this.store.select(selectTracksFavorites).subscribe( (tracksFav) => {
+      this.arrayFavorits = tracksFav;
+      if(this.arrayPlaylist && this.arrayFavorits){
+        this.modifiClassIcon();
+      }
+    });
+    
     if(this.location.path() === '/search'){
       this.isSearchPath = this.isSearchPath
     }else{
@@ -62,31 +61,50 @@ export class CardsComponent implements OnInit, OnDestroy, AfterViewInit  {
   }
 
   isFavorite  = (arrayFavorito: any, id: string): boolean =>{
-    return !!arrayFavorito.find( (item: any) => item.track.id === id) || !!arrayFavorito.find( (item: any) => item.id === id)
+    return !!arrayFavorito.find( (item: any) => item.id === id)
   }
 
   modifiClassIcon(){
-    this.arrayPlaylist.forEach( (item: any) => {
-      if(this.isFavorite(this.arrayFavorits,item.track.id)) {
+    this.arrayPlaylist.forEach( (item: Track) => {
+      if(this.isFavorite(this.arrayFavorits,item.id)) {
         // console.log('id es fav');
-        document.getElementById(item.track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
+        document.getElementById(item.id)?.classList.replace('bi-heart', 'bi-heart-fill');
       }
     });
   }
   
-  modificarFav(track: any){
+  modificarFav(track: Track){
     if(this.isFavorite(this.arrayFavorits,track.id)  ) {
+      document.getElementById(track.id)?.classList.replace('bi-heart-fill', 'bi-heart');
       this.store.dispatch( deleteFavorite({id: track.id} ));
-      this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
-        this.arrayFavorits = tracksFav;
-        document.getElementById(track.id)?.classList.replace('bi-heart-fill', 'bi-heart');
+
+      Swal.fire({
+        toast: true,
+        position: 'bottom',
+        icon: 'error',
+        title: 'Eliminada de favoritos',
+        showConfirmButton: false,
+        timer: 1500,
+        color: 'black',
+        background:'rgb(12, 192, 232)'
       })
+      
     }else{
+      document.getElementById(track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
       this.store.dispatch( addFavorite({track}));
-      this.subcriptionFavorite= this.store.select('favorites').subscribe( ({  tracksFav }) => {
-        this.arrayFavorits = tracksFav;
-        document.getElementById(track.id)?.classList.replace('bi-heart', 'bi-heart-fill');
+      
+      Swal.fire({
+        toast: true,
+        position: 'bottom',
+        icon: 'success',
+        title: 'Agregada favoritos',
+        showConfirmButton: false,
+        timer: 1500,
+        color: 'black',
+        background:'rgb(12, 192, 232)'
       })
+ 
     }
   }
+
 }

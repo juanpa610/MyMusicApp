@@ -16,7 +16,7 @@ export const playlistReducer = createReducer(
   on(actions.cargarPlaylistSuccess, (state,{playlist}) => ({
     ...state,
     cargando: false, 
-    playlist: playlist.tracks.items,
+    playlist: playlist.tracks.items.map((track: any) => track.track),
     name: playlist.name
   })),
 

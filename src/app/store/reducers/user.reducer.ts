@@ -22,8 +22,8 @@ export const userDataReducer = createReducer(
     log: true
   })),
   
-  on( actions.logout, state => ({...state, log: false})),
   on( actions.login, state => ({...state, log: true})),
+  on( actions.logout, state => ({...state, log: false})),
 
   on(actions.cargarUserDataError, (state,{ payload}) => ({
     ...state,

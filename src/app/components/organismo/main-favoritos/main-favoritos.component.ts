@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
 import { AppState } from 'src/app/store/app.state';
+import { selectCargandoFav, selectTracksFavorites } from 'src/app/store/selectors/favorites.selectors';
 
 @Component({
   selector: 'app-main-favoritos',
@@ -11,7 +12,7 @@ import { AppState } from 'src/app/store/app.state';
 })
 export class MainFavoritosComponent implements OnInit, OnDestroy{
 
-  misFavoritos: ReadonlyArray<any> = [];
+  misFavoritos: any = [];
   cargando: boolean = false;
   error: any;
 
@@ -20,20 +21,11 @@ export class MainFavoritosComponent implements OnInit, OnDestroy{
   constructor(private store: Store<AppState>){}
 
   ngOnInit(): void {
-    
-    this.subcriptionFavorite= this.store.select('favorites').subscribe( ({tracksFav, cargando, error }) => {
-      this.misFavoritos = tracksFav;
-      this.cargando = cargando;
-      this.error    = error;
-        
-    })
-   
-    this.store.dispatch( cargarFavorites());
+    this.subcriptionFavorite = this.store.select(selectTracksFavorites).subscribe( (playlist)=>{ this.misFavoritos= playlist; });
   }
 
   ngOnDestroy(): void {
     this.subcriptionFavorite.unsubscribe();
   }
-
 
 }

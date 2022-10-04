@@ -14,9 +14,9 @@ export class FavoritesEffects {
         mergeMap(() => this.spotifyServices.getFavorits() // retorna toda la Data 
         .pipe(
             // tap(data => console.log('effect  favorites tap',data)),
-            map(fav => cargarFavoritesSuccess({ tracks: fav }) ),  // aqui estoy mapeando los datos en Tracks
+            map(fav => cargarFavoritesSuccess({ tracksFav: fav }) ),  // aqui estoy mapeando los datos en Tracks
             catchError(err => of (cargarFavoritesError({ payload:err }) ) )
-            )
+        )
       )
     )
   );

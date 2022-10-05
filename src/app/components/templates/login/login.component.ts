@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { cargarUserData, login } from 'src/app/store/actions/user.actions';
-import { AppState } from 'src/app/store/app.state';
+import { login } from '../../../store/actions/user.actions';
+import { AppState } from '../../../store/app.state';
 import { environment } from 'src/environments/environment';   
 @Component({
   selector: 'app-login',

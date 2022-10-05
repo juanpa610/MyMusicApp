@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { FavoritesState } from 'src/app/interfaces/favorites.state';
+import { FavoritesState } from '../../interfaces/favorites.state';
 import * as actions from '../actions/favotites.actions';
 
 //Estado inicial!!!

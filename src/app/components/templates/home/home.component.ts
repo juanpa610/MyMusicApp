@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { TokenService } from 'src/app/services/token.service';
-import { cargarUserData, login } from 'src/app/store/actions/user.actions';
-import { AppState } from 'src/app/store/app.state';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +8,7 @@ import { AppState } from 'src/app/store/app.state';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(   private router: Router, private store: Store<AppState>) {
+  constructor(   private router: Router) {
     this.obtenerUrl();
   }
 
@@ -20,7 +16,6 @@ export class HomeComponent implements OnInit {
 
   obtenerUrl  () {
     this.router.navigate(['/home']);
-  
   }
   
 }

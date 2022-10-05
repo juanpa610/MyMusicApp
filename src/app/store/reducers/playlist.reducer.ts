@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { PlaylistState } from 'src/app/interfaces/playlist.state';
+import { PlaylistState } from '../../interfaces/playlist.state';
 import * as actions from '../actions/playlist.actions';
 
 export const playlistInitialState: PlaylistState = {

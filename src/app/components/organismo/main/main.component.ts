@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { TokenService } from 'src/app/services/token.service';
-import { cargarPlaylist } from 'src/app/store/actions/playlist.actions';
-import { cargarUserData } from 'src/app/store/actions/user.actions';
-import { AppState } from 'src/app/store/app.state';
-import { selectCargando, selectNamePlaylist, selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector';
+import { TokenService } from '../../../services/token.service';
+import { cargarPlaylist } from '../../../store/actions/playlist.actions';
+import { cargarUserData } from '../../../store/actions/user.actions';
+import { AppState } from '../../../store/app.state';
+import { selectCargando, selectNamePlaylist, selectTracksPlaylist } from '../../../store/selectors/playlist.selector';
 
 @Component({
   selector: 'app-main',

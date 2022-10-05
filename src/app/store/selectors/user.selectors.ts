@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { DataUserState } from 'src/app/interfaces/userData.state';
+import { DataUserState } from '../../interfaces/userData.state';
 import { AppState } from '../app.state';
  
 export const selectUserData = (state: AppState) => state.userData;

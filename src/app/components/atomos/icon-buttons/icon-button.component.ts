@@ -1,6 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input ,AfterViewInit} from '@angular/core';
-import { IconServiceService } from 'src/app/services/icon-service.service';
+import { IconServiceService } from '../../../services/icon-service.service';
 
 @Component({
   selector: 'app-icon-button',

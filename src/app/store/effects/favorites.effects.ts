@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-import { SpotifyService } from 'src/app/services/spotify.service';
+import { SpotifyService } from '../../services/spotify.service';
 import { cargarFavorites, cargarFavoritesError, cargarFavoritesSuccess } from '../actions/favotites.actions';
 
 @Injectable()

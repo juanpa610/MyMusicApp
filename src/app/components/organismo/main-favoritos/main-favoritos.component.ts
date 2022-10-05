@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
-import { cargarFavorites } from 'src/app/store/actions/favotites.actions';
-import { AppState } from 'src/app/store/app.state';
-import { selectCargandoFav, selectTracksFavorites } from 'src/app/store/selectors/favorites.selectors';
+import { Subscription } from 'rxjs';
+import { AppState } from '../../../store/app.state';
+import { selectTracksFavorites } from '../../../store/selectors/favorites.selectors';
 
 @Component({
   selector: 'app-main-favoritos',

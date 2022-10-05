@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/app.state';
+import { AppState } from '../../../store/app.state';
 import { Subscription } from 'rxjs';
-import { addFavorite, cargarFavorites, deleteFavorite } from 'src/app/store/actions/favotites.actions';
-import { selectTracksFavorites } from 'src/app/store/selectors/favorites.selectors';
-import { selectTracksPlaylist } from 'src/app/store/selectors/playlist.selector';
-import { Track } from 'src/app/interfaces/track.interface';
+import { addFavorite, cargarFavorites, deleteFavorite } from '../../../store/actions/favotites.actions';
+import { selectTracksFavorites } from '../../../store/selectors/favorites.selectors';
+import { selectTracksPlaylist } from '../../../store/selectors/playlist.selector';
+import { Track } from '../../../interfaces/track.interface';
 import Swal from 'sweetalert2';
 
 @Component({

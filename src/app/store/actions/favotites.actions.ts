@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Track } from 'src/app/interfaces/track.interface';
+import { Track } from '../../interfaces/track.interface';
 
 export const cargarFavorites = createAction(
     '[Favorites] Cargar Favorites'

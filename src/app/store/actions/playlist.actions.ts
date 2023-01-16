@@ -8,6 +8,6 @@ export const cargarPlaylistSuccess = createAction(
 );
 
 export const cargarPlaylistError = createAction(
-    '[Playlist] Cargar Playlist Er',
+    '[Playlist] Cargar Playlist Error',
     props<{payload: any}>()
 );
